@@ -31,7 +31,12 @@ class UpdateInvoiceResponse extends AbstractResponse
     public function getErrorMessage()
     {
         if (array_key_exists('Errors', $this->data)) {
-            return $this->data['Errors'][0]['Message'];
+            if ($this->data['Errors'][0]['Message'] === 'The supplied OAuth token (Bearer) is not valid') {
+                return 'The access token has expired';
+            }
+            else {
+                return $this->data['Errors'][0]['Message'];
+            }
         }
         return null;
     }
