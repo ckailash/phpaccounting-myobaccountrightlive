@@ -18,8 +18,8 @@ class GetAccountResponse extends AbstractResponse
      */
     public function isSuccessful()
     {
-        if(array_key_exists('status', $this->data)){
-            return !$this->data['status'] == 'error';
+        if(array_key_exists('Errors', $this->data)){
+            return !$this->data['Errors'][0]['Severity'] == 'Error';
         }
         return true;
     }
@@ -28,9 +28,10 @@ class GetAccountResponse extends AbstractResponse
      * Fetch Error Message from Response
      * @return string
      */
-    public function getErrorMessage(){
-        if(array_key_exists('status', $this->data)){
-            return $this->data['detail'];
+    public function getErrorMessage()
+    {
+        if (array_key_exists('Errors', $this->data)) {
+            return $this->data['Errors'][0]['Message'];
         }
         return null;
     }

@@ -17,8 +17,8 @@ class GetOrganisationResponse extends AbstractResponse
      */
     public function isSuccessful()
     {
-        if(array_key_exists('status', $this->data)){
-            return !$this->data['status'] == 'error';
+        if(array_key_exists('Errors', $this->data)){
+            return !$this->data['Errors'][0]['Severity'] == 'Error';
         }
         return true;
     }
@@ -29,8 +29,8 @@ class GetOrganisationResponse extends AbstractResponse
      */
     public function getErrorMessage()
     {
-        if (array_key_exists('status', $this->data)) {
-            return $this->data['detail'];
+        if (array_key_exists('Errors', $this->data)) {
+            return $this->data['Errors'][0]['Message'];
         }
         return null;
     }
@@ -43,6 +43,7 @@ class GetOrganisationResponse extends AbstractResponse
     public function getOrganisations(){
         $organisations = [];
         foreach ($this->data as $organisation) {
+            var_dump($organisation);
             $newOrganisation = [];
             $newOrganisation['accounting_id'] = IndexSanityCheckHelper::indexSanityCheck('Id', $organisation);
             $newOrganisation['name'] = IndexSanityCheckHelper::indexSanityCheck('Name', $organisation);

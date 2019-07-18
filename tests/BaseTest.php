@@ -22,5 +22,4 @@ class BaseTest extends TestCase
         $this->gateway->setCompanyEndpoint(getenv('COMPANY_FILE_URI'));
         $this->gateway->setCompanyFile(base64_encode('Administrator:'));
     }
-
 }
