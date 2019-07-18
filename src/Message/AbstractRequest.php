@@ -1,6 +1,5 @@
 <?php
 namespace PHPAccounting\MyobAccountRight\Message;
-
 use Omnipay\Common\Message\ResponseInterface;
 
 abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
@@ -107,14 +106,14 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
      */
     public function getData()
     {
-        // TODO: Implement getData() method.
+
     }
 
     /**
      * Send the request with specified data
      *
      * @param  mixed $data The data to send
-     * @return ResponseInterface
+     * @return string
      */
     public function sendData($data)
     {
@@ -122,11 +121,12 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         $headers = $this->getHeaders();
         $body = $data ? http_build_query($data, '', '&') : null;
         $httpResponse = $this->httpClient->request($this->getHttpMethod(), $endpoint . $this->getEndpoint(), $headers, $body);
-        return $this->createResponse(json_decode($httpResponse->getBody()->getContents(), true), $httpResponse->getHeaders());
-    }
+        $this->createResponse(json_decode($httpResponse->getBody()->getContents(), true), $httpResponse->getHeaders());
 
-    protected function createResponse($data, $headers = [])
-    {
-        return $this->response = new Response($this, $data, $headers);
+        if ($this->response->isSuccessful()) {
+            return $this->response;
+        } else {
+            return $this->response->getErrorMessage();
+        }
     }
 }

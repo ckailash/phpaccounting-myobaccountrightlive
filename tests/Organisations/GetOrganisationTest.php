@@ -13,13 +13,8 @@ class GetOrganisationTest extends BaseTest
     {
         $this->setUp();
         try {
-
             $response = $this->gateway->getOrganisation()->send();
-            if ($response->isSuccessful()) {
-                var_dump($response->getOrganisations());
-            } else {
-                var_dump($response->getErrorMessage());
-            }
+            var_dump($response);
         } catch (\Exception $exception) {
             var_dump($exception->getMessage());
         }

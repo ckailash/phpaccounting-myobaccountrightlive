@@ -48,7 +48,6 @@ class GetOrganisationResponse extends AbstractResponse
     public function getOrganisations(){
         $organisations = [];
         foreach ($this->data as $organisation) {
-            var_dump($organisation);
             $newOrganisation = [];
             $newOrganisation['accounting_id'] = IndexSanityCheckHelper::indexSanityCheck('Id', $organisation);
             $newOrganisation['name'] = IndexSanityCheckHelper::indexSanityCheck('Name', $organisation);
