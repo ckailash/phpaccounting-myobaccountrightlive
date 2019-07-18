@@ -122,11 +122,6 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         $body = $data ? http_build_query($data, '', '&') : null;
         $httpResponse = $this->httpClient->request($this->getHttpMethod(), $endpoint . $this->getEndpoint(), $headers, $body);
         $this->createResponse(json_decode($httpResponse->getBody()->getContents(), true), $httpResponse->getHeaders());
-
-        if ($this->response->isSuccessful()) {
-            return $this->response;
-        } else {
-            return $this->response->getErrorMessage();
-        }
+        return $this->response;
     }
 }
