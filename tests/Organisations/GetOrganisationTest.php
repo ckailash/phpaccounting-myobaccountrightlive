@@ -8,13 +8,16 @@ use Tests\BaseTest;
 
 class GetOrganisationTest extends BaseTest
 {
-
     public function testGetOrganisation()
     {
         $this->setUp();
         try {
             $response = $this->gateway->getOrganisation()->send();
-            var_dump($response);
+            if ($response->isSuccessful()) {
+                var_dump($response->getOrganisations());
+            } else {
+                var_dump($response->getErrorMessage());
+            }
         } catch (\Exception $exception) {
             var_dump($exception->getMessage());
         }
