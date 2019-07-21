@@ -1,18 +1,21 @@
 <?php
 
-namespace PHPAccounting\MyobAccountRight\Message\Accounts\Requests;
+namespace PHPAccounting\MyobAccountRight\Message\TaxRates\Requests;
 
+use PHPAccounting\MyobAccountRight\Helpers\IndexSanityCheckHelper;
 use PHPAccounting\MyobAccountRight\Message\AbstractRequest;
 use PHPAccounting\MyobAccountRight\Message\Accounts\Responses\CreateAccountResponse;
-
+use PHPAccounting\MyobAccountRight\Message\Accounts\Responses\GetAccountResponse;
+use PHPAccounting\MyobAccountRight\Message\Accounts\Responses\UpdateAccountResponse;
+use PHPAccounting\MyobAccountRight\Message\Contacts\Requests\UpdateContactRequest;
+use PHPAccounting\MyobAccountRight\Message\TaxRates\Responses\UpdateTaxRateResponse;
 
 /**
- * Create Account(s)
- * @package PHPAccounting\MyobAccountRight\Message\Accounts\Requests
+ * Update Tax Rate(s)
+ * @package PHPAccounting\MyobAccountRight\Message\TaxRates\Requests
  */
-class CreateAccountRequest extends AbstractRequest
+class UpdateTaxRateRequest extends AbstractRequest
 {
-
 
     /**
      * Get the raw data array for this message. The format of this varies from gateway to
@@ -40,11 +43,11 @@ class CreateAccountRequest extends AbstractRequest
     /**
      * Create Generic Response from Xero Endpoint
      * @param mixed $data Array Elements or Xero Collection from Response
-     * @return CreateAccountResponse
+     * @return UpdateTaxRateResponse
      */
     public function createResponse($data)
     {
-        return $this->response = new CreateAccountResponse($this, $data);
+        return $this->response = new UpdateTaxRateResponse($this, $data);
     }
 
     public function getEndpoint()

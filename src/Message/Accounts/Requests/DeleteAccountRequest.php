@@ -46,4 +46,9 @@ class DeleteAccountRequest extends AbstractRequest
     {
         return $this->response = new DeleteAccountResponse($this, $data);
     }
+
+    public function getEndpoint()
+    {
+        // TODO: Implement getEndpoint() method.
+    }
 }

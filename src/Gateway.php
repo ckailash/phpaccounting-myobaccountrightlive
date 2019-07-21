@@ -163,6 +163,28 @@ class Gateway extends AbstractGateway
     }
 
     /**
+     * Tax Rate Requests
+     * @param array $parameters
+     * @return \Omnipay\Common\Message\AbstractRequest
+     */
+
+    public function createTaxRate(array $parameters = []){
+        return $this->createRequest('\PHPAccounting\MyobAccountRight\Message\TaxRates\Requests\CreateTaxRateRequest', $parameters);
+    }
+
+    public function updateTaxRate(array $parameters = []){
+        return $this->createRequest('\PHPAccounting\MyobAccountRight\Message\TaxRates\Requests\UpdateTaxRateRequest', $parameters);
+    }
+
+    public function getTaxRate(array $parameters = []){
+        return $this->createRequest('\PHPAccounting\MyobAccountRight\Message\TaxRates\Requests\GetTaxRateRequest', $parameters);
+    }
+
+    public function deleteTaxRate(array $parameters = []){
+        return $this->createRequest('\PHPAccounting\MyobAccountRight\Message\TaxRates\Requests\DeleteTaxRaeRequest', $parameters);
+    }
+
+    /**
      * Payment Requests
      * @param array $parameters
      * @return \Omnipay\Common\Message\AbstractRequest

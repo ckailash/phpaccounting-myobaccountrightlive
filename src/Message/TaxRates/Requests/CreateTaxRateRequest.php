@@ -1,16 +1,17 @@
 <?php
 
-namespace PHPAccounting\MyobAccountRight\Message\Accounts\Requests;
+namespace PHPAccounting\MyobAccountRight\Message\TaxRates\Requests;
 
 use PHPAccounting\MyobAccountRight\Message\AbstractRequest;
 use PHPAccounting\MyobAccountRight\Message\Accounts\Responses\CreateAccountResponse;
+use PHPAccounting\MyobAccountRight\Message\TaxRates\Responses\CreateTaxRateResponse;
 
 
 /**
- * Create Account(s)
+ * Create Tax Rate(s)
  * @package PHPAccounting\MyobAccountRight\Message\Accounts\Requests
  */
-class CreateAccountRequest extends AbstractRequest
+class CreateTaxRateRequest extends AbstractRequest
 {
 
 
@@ -29,7 +30,7 @@ class CreateAccountRequest extends AbstractRequest
     /**
      * Send Data to Xero Endpoint and Retrieve Response via Response Interface
      * @param mixed $data Parameter Bag Variables After Validation
-     * @return \Omnipay\Common\Message\ResponseInterface|CreateAccountResponse
+     * @return \Omnipay\Common\Message\ResponseInterface|CreateTaxRateRequest
      */
     public function sendData($data)
     {
@@ -44,7 +45,7 @@ class CreateAccountRequest extends AbstractRequest
      */
     public function createResponse($data)
     {
-        return $this->response = new CreateAccountResponse($this, $data);
+        return $this->response = new CreateTaxRateResponse($this, $data);
     }
 
     public function getEndpoint()

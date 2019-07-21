@@ -48,4 +48,9 @@ class UpdateAccountRequest extends AbstractRequest
     {
         return $this->response = new UpdateAccountResponse($this, $data);
     }
+
+    public function getEndpoint()
+    {
+        // TODO: Implement getEndpoint() method.
+    }
 }
