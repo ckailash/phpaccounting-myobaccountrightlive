@@ -47,6 +47,24 @@ class GetContactResponse extends AbstractResponse
         array_push($contact, $newPhone);
     }
 
+    private function parseType($contact, $type) {
+        $contact['types'] = [];
+        switch($type) {
+            case 'Customer':
+                array_push($contact['types'], 'CUSTOMER');
+                break;
+            case 'Supplier':
+                array_push($contact['types'], 'SUPPLIER');
+                break;
+            case 'Employee':
+                array_push($contact['types'], 'EMPLOYEE');
+                break;
+            case 'Personal':
+                array_push($contact['types'], 'PERSONAL');
+                break;
+        }
+        return $contact;
+    }
 
     public function parseAddressesAndPhones($contact, $data) {
         $contact['addresses'] = [];
@@ -90,8 +108,11 @@ class GetContactResponse extends AbstractResponse
             $newContact['last_name'] = IndexSanityCheckHelper::indexSanityCheck('LastName', $contact);
             $newContact['display_name'] = IndexSanityCheckHelper::indexSanityCheck('DisplayID', $contact);
             $newContact['is_individual'] = IndexSanityCheckHelper::indexSanityCheck('IsIndividual', $contact);
-            $newContact['type'] = IndexSanityCheckHelper::indexSanityCheck('Type', $contact);
             $newContact['updated_at'] = IndexSanityCheckHelper::indexSanityCheck('LastModified', $contact);
+
+            if (array_key_exists('Type', $contact)) {
+                $newContact = $this->parseType($newContact, $contact['Type']);
+            }
 
             if (array_key_exists('Addresses', $contact)) {
                 $newContact = $this->parseAddressesAndPhones($newContact, $contact['Addresses']);
