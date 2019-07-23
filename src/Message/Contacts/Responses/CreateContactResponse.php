@@ -47,6 +47,7 @@ class CreateContactResponse extends AbstractResponse
      * @return array
      */
     public function getContacts(){
+        var_dump($this->data);
         $contacts = [];
         return $contacts;
     }

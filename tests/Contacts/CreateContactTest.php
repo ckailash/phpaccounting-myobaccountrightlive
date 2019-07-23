@@ -15,6 +15,7 @@ class CreateContactTest extends BaseTest
                 'first_name' => $faker->firstName,
                 'last_name' => $faker->lastName,
                 'email_address' => $faker->email,
+                'type' => 'CUSTOMER',
                 'addresses' => [
                     [
                         'type' => 'STREET',
@@ -23,13 +24,20 @@ class CreateContactTest extends BaseTest
                         'postal_code' => $faker->postcode,
                         'country' => $faker->country
                     ]
+                ],
+                'phones' => [
+                    [
+                        'area_code' => '4',
+                        'country_code' => '61',
+                        'phone_number' => '35567535'
+                    ]
                 ]
             ];
 
             $response = $this->gateway->createContact($params)->send();
+            var_dump($response);
             if ($response->isSuccessful()) {
                 $contacts = $response->getContacts();
-                var_dump($contacts);
                 $this->assertIsArray($contacts);
             }
         } catch (\Exception $exception) {

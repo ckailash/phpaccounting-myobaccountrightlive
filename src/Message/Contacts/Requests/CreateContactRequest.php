@@ -158,7 +158,13 @@ class CreateContactRequest extends AbstractRequest
      */
     public function getPhoneData($data) {
         $phones = [];
-
+        foreach($data as $phone) {
+            $newPhone = [];
+            $newPhone['Phone1'] = (IndexSanityCheckHelper::indexSanityCheck('country_code', $phone))
+                . IndexSanityCheckHelper::indexSanityCheck('area_code', $phone)
+                . IndexSanityCheckHelper::indexSanityCheck('phone_number', $phone);
+            array_push($phones, $newPhone);
+        }
         return $phones;
     }
 
@@ -171,22 +177,16 @@ class CreateContactRequest extends AbstractRequest
      */
     public function getData()
     {
-        $this->validate('name', 'type');
-        $this->issetParam('Name', 'name');
-        $this->issetParam('FirstName', 'display_name');
+        $this->issetParam('FirstName', 'first_name');
         $this->issetParam('LastName', 'last_name');
-        $this->issetParam('EmailAddress', 'email_address');
-        $this->issetParam('Website', 'website');
-        $this->issetParam('BankAccountDetails', 'bank_account_details');
-        $this->issetParam('TaxNumber', 'tax_number');
-        $this->issetParam('AccountsReceivableTaxType', 'accounts_receivable_tax_type');
-        $this->issetParam('AccountsPayableTaxType', 'accounts_payable_tax_type');
-        $this->issetParam('DefaultCurrency', 'default_currency');
-        $this->issetParam('ContactStatus','status');
+        $this->issetParam('IsIndividual', 'is_individual');
+//        $this->issetParam('DefaultCurrency', 'default_currency');
 
-        $this->data['Phones'] = ($this->getPhones() != null ? $this->getPhoneData($this->getPhones()) : null);
-        $this->data['Addresses'] = ($this->getAddresses() != null ? $this->getAddressData($this->getAddresses()) : null);
-        $this->data['ContactGroups'] = ($this->getContactGroups() != null ? $this->getContactGroupData($this->getContactGroups()) : null);
+//        $phones = ($this->getPhones() != null ? $this->getPhoneData($this->getPhones()) : null);
+//        if ($phones) {
+//            $this->data['Addresses'] = $phones;
+//        }
+//        $this->data['Addresses'] = ($this->getAddresses() != null ? $this->getAddressData($this->getAddresses()) : null);
         return $this->data;
     }
 
