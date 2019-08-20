@@ -50,7 +50,7 @@ class GetAccountResponse extends AbstractResponse
         foreach ($this->data['Items'] as $account) {
             $newAccount = [];
             $newAccount['accounting_id'] = IndexSanityCheckHelper::indexSanityCheck('UID', $account);
-            $newAccount['code'] = IndexSanityCheckHelper::indexSanityCheck('Number', $account);
+            $newAccount['code'] = IndexSanityCheckHelper::indexSanityCheck('DisplayID', $account);
             $newAccount['name'] = IndexSanityCheckHelper::indexSanityCheck('Name', $account);
             $newAccount['description'] = IndexSanityCheckHelper::indexSanityCheck('Description', $account);
             $newAccount['type'] = IndexSanityCheckHelper::indexSanityCheck('Type', $account);

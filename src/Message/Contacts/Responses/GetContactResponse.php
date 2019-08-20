@@ -40,11 +40,89 @@ class GetContactResponse extends AbstractResponse
         return null;
     }
 
-    public function addPhone($contact, $data) {
+    public function addPhone($contact, $data, $type = '') {
         $newPhone = [];
-        $newPhone['type'] = 'OTHER';
-        $newPhone['phone_number'] = $data;
-        array_push($contact, $newPhone);
+        switch ($type) {
+            case 'Default':
+                $newPhone['type'] = 'DEFAULT';
+                break;
+            case 'Phone1':
+                $newPhone['type'] = 'OTHER';
+                break;
+            case 'Phone2':
+                $newPhone['type'] = 'OTHER';
+                break;
+            case 'Phone3':
+                $newPhone['type'] = 'OTHER';
+                break;
+            case 'Fax':
+                $newPhone['type'] = 'FAX';
+                break;
+            default:
+                $newPhone['type'] = 'OTHER';
+                break;
+
+        }
+        if ($data !== '') {
+            $newPhone['phone_number'] = $data;
+            array_push($contact['phones'], $newPhone);
+        }
+        return $contact;
+
+    }
+    private function createNoteForAddress($data, $address) {
+        $note = '';
+        if (array_key_exists('Phone1', $data)) {
+            if ($data['Phone1'] !== '') {
+                $note = $note . 'Phone 1: '.$data['Phone1']. '\n';
+            }
+        }
+        if (array_key_exists('Phone2', $data)) {
+            if ($data['Phone2'] !== '') {
+                $note = $note . 'Phone 2: '.$data['Phone2']. '\n';
+            }
+
+        }
+        if (array_key_exists('Phone3', $data)) {
+            if ($data['Phone3'] !== '') {
+                $note = $note . 'Phone 3: '.$data['Phone3']. '\n';
+            }
+
+        }
+        if (array_key_exists('Fax', $data)) {
+            if ($data['Fax'] !== '') {
+                $note = $note . 'Fax: '.$data['Fax']. '\n';
+            }
+
+        }
+        if (array_key_exists('Email', $data)) {
+            if ($data['Email'] !== '') {
+                $note = $note . 'Email: '.$data['Email'].'\n';
+            }
+
+        }
+        if (array_key_exists('Website', $data)) {
+            if ($data['Website'] !== '') {
+                $note = $note . 'Website: '.$data['Website']. '\n';
+            }
+
+        }
+        if (array_key_exists('ContactName', $data)) {
+            if ($data['ContactName'] !== '') {
+                $note = $note . 'Contact: '.$data['ContactName']. '\n';
+            }
+        }
+        if (array_key_exists('Salutation', $data)) {
+            if ($data['Salutation'] !== '') {
+                $note = $note . 'Salutation'.$data['Salutation']. '\n';
+            }
+        }
+
+        if ($note !== '') {
+            $address['note'] = $note;
+        }
+
+        return $address;
     }
 
     private function parseType($contact, $type) {
@@ -68,31 +146,51 @@ class GetContactResponse extends AbstractResponse
 
     public function parseAddressesAndPhones($contact, $data) {
         $contact['addresses'] = [];
+        $contact['phones'] = [];
         if ($data) {
             $addresses = [];
+            $default = true;
             foreach($data as $address) {
                 $newAddress = [];
-                $newAddress['address_type'] = 'EXTRA';
+                if ($default) {
+                    $newAddress['address_type'] = 'PRIMARY';
+                } else {
+                    $newAddress['address_type'] = 'EXTRA';
+                }
+
                 $newAddress['address_line_1'] = IndexSanityCheckHelper::indexSanityCheck('Street', $address);
                 $newAddress['city'] = IndexSanityCheckHelper::indexSanityCheck('City', $address);
                 $newAddress['postal_code'] = IndexSanityCheckHelper::indexSanityCheck('PostCode', $address);
                 $newAddress['country'] = IndexSanityCheckHelper::indexSanityCheck('Country', $address);
 
                 if (array_key_exists('Phone1', $address)) {
-                    $this->addPhone($contact, $address['Phone1']);
+                    if ($default) {
+                        $contact = $this->addPhone($contact, $address['Phone1'], 'Default');
+                    }
+                    else {
+                        $contact = $this->addPhone($contact, $address['Phone1'], 'Phone1');
+                    }
                 }
                 if (array_key_exists('Phone2', $address)) {
-                    $this->addPhone($contact, $address['Phone2']);
+                    $contact = $this->addPhone($contact, $address['Phone2'], 'Phone2');
                 }
                 if (array_key_exists('Phone3', $address)) {
-                    $this->addPhone($contact, $address['Phone3']);
+                    $contact = $this->addPhone($contact, $address['Phone3'], 'Phone3');
                 }
-
+                if (array_key_exists('Fax', $address)) {
+                    if ($default) {
+                        $contact = $this->addPhone($contact, $address['Fax'], 'Fax');
+                    }
+                    else {
+                        $contact = $this->addPhone($contact, $address['Fax']);
+                    }
+                }
+                $newAddress = $this->createNoteForAddress($address, $newAddress);
                 array_push($addresses, $newAddress);
+                $default = false;
             }
             $contact['addresses'] = $addresses;
         }
-
         return $contact;
     }
     /**

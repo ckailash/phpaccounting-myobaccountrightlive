@@ -78,14 +78,13 @@ class GetInvoiceResponse extends AbstractResponse
 
                 if (array_key_exists('TaxCode', $lineItem)) {
                     if ($lineItem['TaxCode']) {
-                        $newLineItem['tax_type'] = IndexSanityCheckHelper::indexSanityCheck('Number', $lineItem['TaxCode']);
+                        $newLineItem['tax_type'] = IndexSanityCheckHelper::indexSanityCheck('Code', $lineItem['TaxCode']);
                     }
                 }
 
                 if (array_key_exists('Item', $lineItem)) {
                     if ($lineItem['Item']) {
-                        $newLineItem['code'] = IndexSanityCheckHelper::indexSanityCheck('Number', $lineItem['Item']);
-                        $newLineItem['item_code'] = IndexSanityCheckHelper::indexSanityCheck('UID', $lineItem['Item']);
+                        $newLineItem['item_code'] = IndexSanityCheckHelper::indexSanityCheck('Number', $lineItem['Item']);
                     }
                 }
 

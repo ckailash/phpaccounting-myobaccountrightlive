@@ -93,14 +93,6 @@ class Gateway extends AbstractGateway
      * @return \Omnipay\Common\Message\AbstractRequest
      */
 
-    public function createContact(array $parameters = []){
-        return $this->createRequest('\PHPAccounting\MyobAccountRight\Message\Contacts\Requests\CreateContactRequest', $parameters);
-    }
-
-    public function updateContact(array $parameters = []){
-        return $this->createRequest('\PHPAccounting\MyobAccountRight\Message\Contacts\Requests\UpdateContactRequest', $parameters);
-    }
-
     /**
      * Get One or Multiple Contacts
      * @param array $parameters
@@ -113,10 +105,6 @@ class Gateway extends AbstractGateway
         return $this->createRequest('\PHPAccounting\MyobAccountRight\Message\Contacts\Requests\GetContactRequest', $parameters);
     }
 
-    public function deleteContact(array $parameters = []){
-        return $this->createRequest('\PHPAccounting\MyobAccountRight\Message\Contacts\Requests\DeleteContactRequest', $parameters);
-    }
-
 
     /**
      * Invoice Requests
@@ -124,20 +112,8 @@ class Gateway extends AbstractGateway
      * @return \Omnipay\Common\Message\AbstractRequest
      */
 
-    public function createInvoice(array $parameters = []){
-        return $this->createRequest('\PHPAccounting\MyobAccountRight\Message\Invoices\Requests\CreateInvoiceRequest', $parameters);
-    }
-
-    public function updateInvoice(array $parameters = []){
-        return $this->createRequest('\PHPAccounting\MyobAccountRight\Message\Invoices\Requests\UpdateInvoiceRequest', $parameters);
-    }
-
     public function getInvoice(array $parameters = []){
         return $this->createRequest('\PHPAccounting\MyobAccountRight\Message\Invoices\Requests\GetInvoiceRequest', $parameters);
-    }
-
-    public function deleteInvoice(array $parameters = []){
-        return $this->createRequest('\PHPAccounting\MyobAccountRight\Message\Invoices\Requests\DeleteInvoiceRequest', $parameters);
     }
 
     /**
@@ -146,20 +122,8 @@ class Gateway extends AbstractGateway
      * @return \Omnipay\Common\Message\AbstractRequest
      */
 
-    public function createAccount(array $parameters = []){
-        return $this->createRequest('\PHPAccounting\MyobAccountRight\Message\Accounts\Requests\CreateAccountRequest', $parameters);
-    }
-
-    public function updateAccount(array $parameters = []){
-        return $this->createRequest('\PHPAccounting\MyobAccountRight\Message\Accounts\Requests\UpdateAccountRequest', $parameters);
-    }
-
     public function getAccount(array $parameters = []){
         return $this->createRequest('\PHPAccounting\MyobAccountRight\Message\Accounts\Requests\GetAccountRequest', $parameters);
-    }
-
-    public function deleteAccount(array $parameters = []){
-        return $this->createRequest('\PHPAccounting\MyobAccountRight\Message\Accounts\Requests\DeleteAccountRequest', $parameters);
     }
 
     /**
@@ -168,20 +132,8 @@ class Gateway extends AbstractGateway
      * @return \Omnipay\Common\Message\AbstractRequest
      */
 
-    public function createTaxRate(array $parameters = []){
-        return $this->createRequest('\PHPAccounting\MyobAccountRight\Message\TaxRates\Requests\CreateTaxRateRequest', $parameters);
-    }
-
-    public function updateTaxRate(array $parameters = []){
-        return $this->createRequest('\PHPAccounting\MyobAccountRight\Message\TaxRates\Requests\UpdateTaxRateRequest', $parameters);
-    }
-
     public function getTaxRate(array $parameters = []){
         return $this->createRequest('\PHPAccounting\MyobAccountRight\Message\TaxRates\Requests\GetTaxRateRequest', $parameters);
-    }
-
-    public function deleteTaxRate(array $parameters = []){
-        return $this->createRequest('\PHPAccounting\MyobAccountRight\Message\TaxRates\Requests\DeleteTaxRaeRequest', $parameters);
     }
 
     /**
@@ -190,20 +142,8 @@ class Gateway extends AbstractGateway
      * @return \Omnipay\Common\Message\AbstractRequest
      */
 
-    public function createPayment(array $parameters = []){
-        return $this->createRequest('\PHPAccounting\MyobAccountRight\Message\Payments\Requests\CreatePaymentRequest', $parameters);
-    }
-
-    public function updatePayment(array $parameters = []){
-        return $this->createRequest('\PHPAccounting\MyobAccountRight\Message\Payments\Requests\UpdatePaymentRequest', $parameters);
-    }
-
     public function getPayment(array $parameters = []){
         return $this->createRequest('\PHPAccounting\MyobAccountRight\Message\Payments\Requests\GetPaymentRequest', $parameters);
-    }
-
-    public function deletePayment(array $parameters = []){
-        return $this->createRequest('\PHPAccounting\MyobAccountRight\Message\Payments\Requests\DeletePaymentRequest', $parameters);
     }
 
     /**
@@ -224,5 +164,25 @@ class Gateway extends AbstractGateway
 
     public function getCurrentUser(array $parameters = []){
         return $this->createRequest('\PHPAccounting\MyobAccountRight\Message\CurrentUser\Requests\GetCurrentUserRequest', $parameters);
+    }
+
+    /**
+     * Journal Requests
+     * @param array $parameters
+     * @return \Omnipay\Common\Message\AbstractRequest
+     */
+
+    public function getJournal(array $parameters = []){
+        return $this->createRequest('\PHPAccounting\MyobAccountRight\Message\Journals\Requests\GetJournalRequest', $parameters);
+    }
+
+    /**
+     * Inventory Item Requests
+     * @param array $parameters
+     * @return \Omnipay\Common\Message\AbstractRequest
+     */
+
+    public function getInventoryItem(array $parameters = []){
+        return $this->createRequest('\PHPAccounting\MyobAccountRight\Message\InventoryItems\Requests\GetInventoryItemRequest', $parameters);
     }
 }

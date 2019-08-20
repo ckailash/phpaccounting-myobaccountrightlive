@@ -120,8 +120,7 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         $endpoint = 'https://api.myob.com/accountright/'. $this->getCompanyEndpoint();
         $headers = $this->getHeaders();
 
-        $body = $data ? http_build_query($data, '', '&') : null;
-
+        $body = json_encode($data);
         $httpResponse = $this->httpClient->request($this->getHttpMethod(), $endpoint . $this->getEndpoint(), $headers, $body);
 
         $this->createResponse(json_decode($httpResponse->getBody()->getContents(), true), $httpResponse->getHeaders());
