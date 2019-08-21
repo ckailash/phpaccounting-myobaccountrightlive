@@ -46,6 +46,9 @@ class GetJournalResponse extends AbstractResponse
             $journalItems = [];
             foreach($data as $journalItem) {
                 $newJournalItem = [];
+                $newJournalItem['tax_amount'] = 0;
+                $newJournalItem['gross_amount'] = 0;
+                $newJournalItem['net_amount'] = 0;
                 $newJournalItem['accounting_id'] = IndexSanityCheckHelper::indexSanityCheck('RowID', $journalItem);
 
                 if (array_key_exists('Account', $journalItem)) {
@@ -59,7 +62,7 @@ class GetJournalResponse extends AbstractResponse
                 }
                 $newJournalItem['tax_amount'] = IndexSanityCheckHelper::indexSanityCheck('TaxAmount', $journalItem);
                 $newJournalItem['gross_amount'] = IndexSanityCheckHelper::indexSanityCheck('Amount', $journalItem);
-                $newJournalItem['net_amount'] = (float) $journalItem['TaxAmount'] + (float) $journalItem['Amount'];
+                $newJournalItem['net_amount'] = (float) $newJournalItem['tax_amount'] + (float) $newJournalItem['gross_amount'];
 
                 array_push($journalItems, $newJournalItem);
             }
@@ -77,11 +80,17 @@ class GetJournalResponse extends AbstractResponse
         $journals = [];
         foreach ($this->data['Items'] as $journal) {
             $newJournal = [];
-
             $newJournal['accounting_id'] = IndexSanityCheckHelper::indexSanityCheck('UID', $journal);
             $newJournal['date'] = IndexSanityCheckHelper::indexSanityCheck('DateOccurred', $journal);
             $newJournal['reference_id'] = IndexSanityCheckHelper::indexSanityCheck('DisplayID', $journal);
-            $newJournal['type'] = IndexSanityCheckHelper::indexSanityCheck('Category', $journal);
+
+            if (array_key_exists('SourceTransaction', $journal)) {
+                if ($journal['SourceTransaction']) {
+                    $newJournal['source_type'] = IndexSanityCheckHelper::indexSanityCheck('TransactionType', $journal['SourceTransaction']);
+                    $newJournal['source_id'] = IndexSanityCheckHelper::indexSanityCheck('UID', $journal['SourceTransaction']);
+                }
+
+            }
 
             if (array_key_exists('Lines', $journal)) {
                 if ($journal['Lines']) {

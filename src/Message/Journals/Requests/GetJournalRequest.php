@@ -60,7 +60,7 @@ class GetJournalRequest extends AbstractRequest
     public function getEndpoint()
     {
 
-        $endpoint = 'GeneralLedger/GeneralJournal/';
+        $endpoint = 'GeneralLedger/JournalTransaction/';
 
         if ($this->getAccountingID()) {
             if ($this->getAccountingID() !== "") {
