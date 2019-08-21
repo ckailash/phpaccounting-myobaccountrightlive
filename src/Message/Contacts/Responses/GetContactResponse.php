@@ -204,8 +204,12 @@ class GetContactResponse extends AbstractResponse
             $newContact['accounting_id'] = IndexSanityCheckHelper::indexSanityCheck('UID', $contact);
             $newContact['first_name'] = IndexSanityCheckHelper::indexSanityCheck('FirstName', $contact);
             $newContact['last_name'] = IndexSanityCheckHelper::indexSanityCheck('LastName', $contact);
-            $newContact['display_name'] = IndexSanityCheckHelper::indexSanityCheck('DisplayID', $contact);
             $newContact['is_individual'] = IndexSanityCheckHelper::indexSanityCheck('IsIndividual', $contact);
+            if ($newContact['is_individual']) {
+                $newContact['display_name'] = $newContact['first_name']. ' '.$newContact['last_name'];
+            } else {
+                $newContact['display_name'] = IndexSanityCheckHelper::indexSanityCheck('CompanyName', $contact);
+            }
             $newContact['updated_at'] = IndexSanityCheckHelper::indexSanityCheck('LastModified', $contact);
 
             if (array_key_exists('Type', $contact)) {
