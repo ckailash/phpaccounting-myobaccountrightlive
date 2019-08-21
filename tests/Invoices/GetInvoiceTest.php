@@ -15,7 +15,7 @@ class GetInvoiceTest extends BaseTest
             $params = [
                 'accounting_id' => "",
                 'page' => 1000,
-                'invoice_type' => 'Item'
+                'invoice_type' => 'Service'
             ];
 
             $response = $this->gateway->getInvoice($params)->send();

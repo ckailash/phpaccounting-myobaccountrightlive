@@ -48,15 +48,11 @@ class GetPaymentResponse extends AbstractResponse
      */
     private function parseInvoices($payment, $data) {
         if ($data) {
-            $payment['invoice'] = [];
-            foreach ($data as $invoice) {
-                $newInvoice = [];
-                $newInvoice['accounting_id'] = IndexSanityCheckHelper::indexSanityCheck('UID', $invoice);
-                $newInvoice['type'] = IndexSanityCheckHelper::indexSanityCheck('Type', $invoice);
-                $newInvoice['invoice_number'] = IndexSanityCheckHelper::indexSanityCheck('Number', $invoice);
-                array_push($payment['invoice'],$newInvoice);
-            }
-
+            $newInvoice = [];
+            $newInvoice['accounting_id'] = IndexSanityCheckHelper::indexSanityCheck('UID', $data[0]);
+            $newInvoice['type'] = IndexSanityCheckHelper::indexSanityCheck('Type', $data[0]);
+            $newInvoice['invoice_number'] = IndexSanityCheckHelper::indexSanityCheck('Number', $data[0]);
+            $payment['invoice'] = $newInvoice;
         }
 
         return $payment;

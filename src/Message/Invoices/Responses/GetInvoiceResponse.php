@@ -69,7 +69,7 @@ class GetInvoiceResponse extends AbstractResponse
             foreach($data as $lineItem) {
                 $newLineItem = [];
                 $newLineItem['accounting_id'] = IndexSanityCheckHelper::indexSanityCheck('RowID', $lineItem);
-                $newLineItem['name'] = IndexSanityCheckHelper::indexSanityCheck('Name', $lineItem);
+                $newLineItem['type'] = IndexSanityCheckHelper::indexSanityCheck('Type', $lineItem);
                 $newLineItem['description'] = IndexSanityCheckHelper::indexSanityCheck('Description', $lineItem);
                 $newLineItem['unit_amount'] = IndexSanityCheckHelper::indexSanityCheck('UnitPrice', $lineItem);
                 $newLineItem['line_amount'] = IndexSanityCheckHelper::indexSanityCheck('Total', $lineItem);
