@@ -177,6 +177,16 @@ class Gateway extends AbstractGateway
     }
 
     /**
+     * Manual Journal Requests
+     * @param array $parameters
+     * @return \Omnipay\Common\Message\AbstractRequest
+     */
+
+    public function getManualJournal(array $parameters = []){
+        return $this->createRequest('\PHPAccounting\MyobAccountRight\Message\ManualJournals\Requests\GetManualJournalRequest', $parameters);
+    }
+
+    /**
      * Inventory Item Requests
      * @param array $parameters
      * @return \Omnipay\Common\Message\AbstractRequest
