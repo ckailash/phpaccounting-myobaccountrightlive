@@ -44,6 +44,7 @@ class GetInventoryItemResponse extends AbstractResponse
         if ($data) {
             if (array_key_exists('CostOfSalesAccount', $data)) {
                 if ($data['CostOfSalesAccount']) {
+                    $item['buying_account_id'] = IndexSanityCheckHelper::class('UID', $data['CostOfSalesAccount']);
                     $item['buying_account_code'] = IndexSanityCheckHelper::indexSanityCheck('DisplayID', $data['CostOfSalesAccount']);
                 }
             }
@@ -51,6 +52,7 @@ class GetInventoryItemResponse extends AbstractResponse
                 if ($data['BuyingDetails']) {
                     if (array_key_exists('TaxCode', $data['BuyingDetails'])) {
                         if ($data['BuyingDetails']['TaxCode']) {
+                            $item['buying_tax_type_id'] = IndexSanityCheckHelper::class('UID', $data['BuyingDetails']['TaxCode']);
                             $item['buying_tax_type_code'] = IndexSanityCheckHelper::indexSanityCheck('Code', $data['BuyingDetails']['TaxCode']);
                         }
                     }
@@ -66,6 +68,7 @@ class GetInventoryItemResponse extends AbstractResponse
         if ($data) {
             if (array_key_exists('IncomeAccount', $data)) {
                 if ($data['IncomeAccount']) {
+                    $item['selling_account_id'] = IndexSanityCheckHelper::indexSanityCheck('UID', $data['IncomeAccount']);
                     $item['selling_account_code'] = IndexSanityCheckHelper::indexSanityCheck('DisplayID', $data['IncomeAccount']);
                 }
             }
@@ -73,10 +76,24 @@ class GetInventoryItemResponse extends AbstractResponse
                 if ($data['SellingDetails']) {
                     if (array_key_exists('TaxCode', $data['SellingDetails'])) {
                         if ($data['SellingDetails']['TaxCode']) {
+                            $item['selling_tax_type_id'] = IndexSanityCheckHelper::indexSanityCheck('UID', $data['SellingDetails']['TaxCode']);
                             $item['selling_tax_type_code'] = IndexSanityCheckHelper::indexSanityCheck('Code', $data['SellingDetails']['TaxCode']);
                         }
                     }
                     $item['selling_unit_price'] = IndexSanityCheckHelper::indexSanityCheck('BaseSellingPrice', $data['SellingDetails']);
+                }
+            }
+        }
+
+        return $item;
+    }
+
+    private function parseAssetDetails($data, $item) {
+        if ($data) {
+            if (array_key_exists('AssetAccount', $data)) {
+                if ($data['AssetAccount']) {
+                    $item['asset_account_id'] = IndexSanityCheckHelper::indexSanityCheck('UID', $data['AssetAccount']);
+                    $item['asset_account_code'] = IndexSanityCheckHelper::class('DisplayID', $data['AssetAccount']);
                 }
             }
         }
@@ -105,6 +122,7 @@ class GetInventoryItemResponse extends AbstractResponse
             $newItem['cost_pool'] = IndexSanityCheckHelper::indexSanityCheck('AverageCost', $item);
             $newItem = $this->parsePurchaseDetails($item, $newItem);
             $newItem = $this->parseSellingDetails($item, $newItem);
+            $newItem = $this->parseAssetDetails($item, $newItem);
             array_push($items, $newItem);
         }
 
