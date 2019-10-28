@@ -44,7 +44,7 @@ class GetInventoryItemResponse extends AbstractResponse
         if ($data) {
             if (array_key_exists('CostOfSalesAccount', $data)) {
                 if ($data['CostOfSalesAccount']) {
-                    $item['buying_account_id'] = IndexSanityCheckHelper::class('UID', $data['CostOfSalesAccount']);
+                    $item['buying_account_id'] = IndexSanityCheckHelper::indexSanityCheck('UID', $data['CostOfSalesAccount']);
                     $item['buying_account_code'] = IndexSanityCheckHelper::indexSanityCheck('DisplayID', $data['CostOfSalesAccount']);
                 }
             }
@@ -52,7 +52,7 @@ class GetInventoryItemResponse extends AbstractResponse
                 if ($data['BuyingDetails']) {
                     if (array_key_exists('TaxCode', $data['BuyingDetails'])) {
                         if ($data['BuyingDetails']['TaxCode']) {
-                            $item['buying_tax_type_id'] = IndexSanityCheckHelper::class('UID', $data['BuyingDetails']['TaxCode']);
+                            $item['buying_tax_type_id'] = IndexSanityCheckHelper::indexSanityCheck('UID', $data['BuyingDetails']['TaxCode']);
                             $item['buying_tax_type_code'] = IndexSanityCheckHelper::indexSanityCheck('Code', $data['BuyingDetails']['TaxCode']);
                         }
                     }
@@ -93,7 +93,7 @@ class GetInventoryItemResponse extends AbstractResponse
             if (array_key_exists('AssetAccount', $data)) {
                 if ($data['AssetAccount']) {
                     $item['asset_account_id'] = IndexSanityCheckHelper::indexSanityCheck('UID', $data['AssetAccount']);
-                    $item['asset_account_code'] = IndexSanityCheckHelper::class('DisplayID', $data['AssetAccount']);
+                    $item['asset_account_code'] = IndexSanityCheckHelper::indexSanityCheck('DisplayID', $data['AssetAccount']);
                 }
             }
         }
