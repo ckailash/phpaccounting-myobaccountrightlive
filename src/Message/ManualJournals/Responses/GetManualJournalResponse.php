@@ -77,7 +77,7 @@ class GetManualJournalResponse extends AbstractResponse
      * Return all Accounts with Generic Schema Variable Assignment
      * @return array
      */
-    public function getJournals(){
+    public function getManualJournals(){
         $journals = [];
         foreach ($this->data['Items'] as $journal) {
             $newJournal = [];
