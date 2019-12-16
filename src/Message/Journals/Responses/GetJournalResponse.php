@@ -50,7 +50,7 @@ class GetJournalResponse extends AbstractResponse
                 $newJournalItem['gross_amount'] = 0;
                 $newJournalItem['net_amount'] = 0;
                 $newJournalItem['accounting_id'] = IndexSanityCheckHelper::indexSanityCheck('RowID', $journalItem);
-
+                $newJournalItem['is_credit'] = IndexSanityCheckHelper::indexSanityCheck('IsCredit', $journalItem);
                 if (array_key_exists('Account', $journalItem)) {
                     $newJournalItem['account_id'] = IndexSanityCheckHelper::indexSanityCheck('UID', $journalItem['Account']);
                     $newJournalItem['account_code'] = IndexSanityCheckHelper::indexSanityCheck('DisplayID', $journalItem['Account']);
