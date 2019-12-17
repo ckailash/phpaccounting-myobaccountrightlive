@@ -63,8 +63,12 @@ class GetManualJournalResponse extends AbstractResponse
                 }
                 $newJournalItem['tax_amount'] = IndexSanityCheckHelper::indexSanityCheck('TaxAmount', $journalItem);
                 $newJournalItem['gross_amount'] = IndexSanityCheckHelper::indexSanityCheck('Amount', $journalItem);
-                $newJournalItem['net_amount'] = (float) $newJournalItem['tax_amount'] + (float) $newJournalItem['gross_amount'];
 
+                if (array_key_exists('tax_amount', $journalItem)) {
+                    $newJournalItem['net_amount'] = (float) $newJournalItem['tax_amount'] + (float) $newJournalItem['gross_amount'];
+                } else {
+                    $newJournalItem['net_amount'] = (float) $newJournalItem['gross_amount'];
+                }
                 array_push($journalItems, $newJournalItem);
             }
 
