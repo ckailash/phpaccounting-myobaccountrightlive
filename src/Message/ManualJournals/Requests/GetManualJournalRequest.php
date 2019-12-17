@@ -3,10 +3,8 @@
 namespace PHPAccounting\MyobAccountRight\Message\ManualJournals\Requests;
 
 use PHPAccounting\MyobAccountRight\Helpers\BuildEndpointHelper;
-use PHPAccounting\MyobAccountRight\Helpers\IndexSanityCheckHelper;
 use PHPAccounting\MyobAccountRight\Message\AbstractRequest;
-use PHPAccounting\MyobAccountRight\Message\Accounts\Responses\GetAccountResponse;
-use PHPAccounting\MyobAccountRight\Message\Journals\Responses\GetJournalResponse;
+use PHPAccounting\MyobAccountRight\Message\ManualJournals\Responses\GetManualJournalResponse;
 
 
 /**
@@ -83,7 +81,7 @@ class GetManualJournalRequest extends AbstractRequest
 
     protected function createResponse($data, $headers = [])
     {
-        return $this->response = new GetJournalResponse($this, $data);
+        return $this->response = new GetManualJournalResponse($this, $data);
     }
 
 }

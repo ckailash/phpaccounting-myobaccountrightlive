@@ -3,7 +3,6 @@ namespace PHPAccounting\MyobAccountRight\Message\InventoryItems\Requests;
 
 use PHPAccounting\MyobAccountRight\Helpers\BuildEndpointHelper;
 use PHPAccounting\MyobAccountRight\Message\AbstractRequest;
-use PHPAccounting\MyobAccountRight\Message\Contacts\Responses\GetContactResponse;
 use PHPAccounting\MyobAccountRight\Message\InventoryItems\Responses\GetInventoryItemResponse;
 
 /**
