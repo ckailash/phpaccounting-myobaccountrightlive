@@ -12,9 +12,10 @@ class BuildEndpointHelper
         return $endpoint;
     }
 
-    public static function paginate($endpoint, $page) {
+    public static function paginate($endpoint, $page, $skip) {
         $prefix = '?$';
-        $endpoint = $endpoint . $prefix."top=".$page;
+        $skipPrefix = '&$';
+        $endpoint = $endpoint . $prefix."top=".$page.$skipPrefix.'skip='.$skip;
         return $endpoint;
     }
 

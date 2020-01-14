@@ -57,6 +57,27 @@ class GetJournalRequest extends AbstractRequest
         return 1;
     }
 
+    /**
+     * Set Page Value for Pagination from Parameter Bag
+     * @param $value
+     * @return GetJournalRequest
+     */
+    public function setSkip($value) {
+        return $this->setParameter('skip', $value);
+    }
+
+    /**
+     * Return Page Value for Pagination
+     * @return integer
+     */
+    public function getSkip() {
+        if ($this->getParameter('skip')) {
+            return $this->getParameter('skip');
+        }
+
+        return 1;
+    }
+
     public function getEndpoint()
     {
 
@@ -69,7 +90,7 @@ class GetJournalRequest extends AbstractRequest
         } else {
             if ($this->getPage()) {
                 if ($this->getPage() !== "") {
-                    $endpoint = BuildEndpointHelper::paginate($endpoint, $this->getPage());
+                    $endpoint = BuildEndpointHelper::paginate($endpoint, $this->getPage(), $this->getSkip());
                 }
             }
         }

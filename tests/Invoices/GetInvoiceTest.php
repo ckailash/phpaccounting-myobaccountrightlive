@@ -14,7 +14,7 @@ class GetInvoiceTest extends BaseTest
         try {
             $params = [
                 'accounting_id' => "",
-                'page' => 1000,
+                'page' => 2000,
                 'invoice_type' => 'Service'
             ];
 

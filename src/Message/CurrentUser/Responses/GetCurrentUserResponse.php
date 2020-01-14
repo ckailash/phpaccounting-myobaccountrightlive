@@ -20,10 +20,8 @@ class GetCurrentUserResponse extends AbstractResponse
         if(array_key_exists('Errors', $this->data)){
             return !$this->data['Errors'][0]['Severity'] == 'Error';
         }
-        if(array_key_exists('Message', $this->data)) {
-            if ($this->data['Message'] === 'Access denied') {
-                return false;
-            }
+        if (count($this->data['Items']) === 0) {
+            return false;
         }
         return true;
     }
@@ -38,8 +36,12 @@ class GetCurrentUserResponse extends AbstractResponse
             if ($this->data['Errors'][0]['Message'] === 'The supplied OAuth token (Bearer) is not valid') {
                 return 'The access token has expired';
             }
-        } elseif ($this->data['Message'] === 'Access denied') {
-            return $this->data['Message'];
+            else {
+                return $this->data['Errors'][0]['Message'];
+            }
+        }
+        if (count($this->data['Items']) === 0) {
+            return 'NULL Returned from API or End of Pagination';
         }
         return null;
     }
