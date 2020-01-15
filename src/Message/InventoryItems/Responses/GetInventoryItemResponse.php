@@ -20,8 +20,10 @@ class GetInventoryItemResponse extends AbstractResponse
         if(array_key_exists('Errors', $this->data)){
             return !$this->data['Errors'][0]['Severity'] == 'Error';
         }
-        if (count($this->data['Items']) === 0) {
-            return false;
+        if (array_key_exists('Items', $this->data)) {
+            if (count($this->data['Items']) === 0) {
+                return false;
+            }
         }
         return true;
     }
@@ -40,9 +42,12 @@ class GetInventoryItemResponse extends AbstractResponse
                 return $this->data['Errors'][0]['Message'];
             }
         }
-        if (count($this->data['Items']) === 0) {
-            return 'NULL Returned from API or End of Pagination';
+        if (array_key_exists('Items', $this->data)) {
+            if (count($this->data['Items']) === 0) {
+                return 'NULL Returned from API or End of Pagination';
+            }
         }
+
         return null;
     }
 
