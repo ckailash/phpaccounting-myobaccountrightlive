@@ -2,9 +2,6 @@
 
 namespace Tests;
 
-use Omnipay\Omnipay;
-use PHPUnit\Framework\TestCase;
-
 
 /**
  * Created by IntelliJ IDEA.
@@ -13,22 +10,22 @@ use PHPUnit\Framework\TestCase;
  * Time: 9:54 AM
  */
 
-class GetAccountTest extends BaseTest
+class GetContactTest extends BaseTest
 {
 
-    public function testGetAccounts()
+    public function testGetContacts()
     {
         $this->setUp();
-        try {
-            $params = [
-                'accounting_id' => "",
-                'page' => 2000,
-                'skip' => 1000
-            ];
+        $params = [
+            'accounting_id' => "",
+            'page' => 1
+        ];
 
-            $response = $this->gateway->getAccount($params)->send();
+        try {
+
+            $response = $this->gateway->getContact($params)->send();
             if ($response->isSuccessful()) {
-                var_dump($response->getAccounts());
+                var_dump($response->getContacts());
             } else {
                 var_dump($response->getErrorMessage());
             }

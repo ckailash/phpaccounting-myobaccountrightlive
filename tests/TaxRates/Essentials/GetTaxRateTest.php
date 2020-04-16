@@ -4,6 +4,7 @@ namespace Tests;
 
 use Omnipay\Omnipay;
 use PHPUnit\Framework\TestCase;
+use XeroPHP\Remote\Collection;
 
 
 /**
@@ -13,22 +14,21 @@ use PHPUnit\Framework\TestCase;
  * Time: 9:54 AM
  */
 
-class GetAccountTest extends BaseTest
+class GetTaxRateTest extends BaseTest
 {
 
-    public function testGetAccounts()
+    public function testGetTaxRates()
     {
         $this->setUp();
         try {
             $params = [
-                'accounting_id' => "",
-                'page' => 2000,
-                'skip' => 1000
+                'accounting_ids' => [""],
+                'page' => 2
             ];
 
-            $response = $this->gateway->getAccount($params)->send();
+            $response = $this->gateway->getTaxRate($params)->send();
             if ($response->isSuccessful()) {
-                var_dump($response->getAccounts());
+                var_dump($response->getTaxRates());
             } else {
                 var_dump($response->getErrorMessage());
             }

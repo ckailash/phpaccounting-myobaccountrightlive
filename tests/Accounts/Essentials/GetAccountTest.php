@@ -22,8 +22,7 @@ class GetAccountTest extends BaseTest
         try {
             $params = [
                 'accounting_id' => "",
-                'page' => 2000,
-                'skip' => 1000
+                'page' => 1
             ];
 
             $response = $this->gateway->getAccount($params)->send();
