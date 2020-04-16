@@ -119,7 +119,7 @@ class Gateway extends AbstractGateway
             $class = Message\Contacts\Requests\Essentials\GetContactRequest::class;
         }
         if ($accessFlag == 'Essentials (New)') {
-            $class = Message\Contacts\Requests\NewEssentials\GetContactRequest::class;
+
         }
         return $this->createRequest($class, $parameters);
     }
@@ -131,7 +131,18 @@ class Gateway extends AbstractGateway
      */
 
     public function getInvoice(array $parameters = []){
-        return $this->createRequest('\PHPAccounting\MyobAccountRightLive\Message\Invoices\Requests\GetInvoiceRequest', $parameters);
+        $accessFlag = $this->getAccessFlag();
+        $class = '';
+        if ($accessFlag == 'Online AccountRight') {
+            $class = Message\Invoices\Requests\AccountRight\GetInvoiceRequest::class;
+        }
+        if ($accessFlag == 'Essentials') {
+            $class = Message\Invoices\Requests\Essentials\GetInvoiceRequest::class;
+        }
+        if ($accessFlag == 'Essentials (New)') {
+
+        }
+        return $this->createRequest($class, $parameters);
     }
 
     /**
@@ -141,7 +152,18 @@ class Gateway extends AbstractGateway
      */
 
     public function getAccount(array $parameters = []){
-        return $this->createRequest('\PHPAccounting\MyobAccountRightLive\Message\Accounts\Requests\GetAccountRequest', $parameters);
+        $accessFlag = $this->getAccessFlag();
+        $class = '';
+        if ($accessFlag == 'Online AccountRight') {
+            $class = Message\Accounts\Requests\AccountRight\GetAccountRequest::class;
+        }
+        if ($accessFlag == 'Essentials') {
+            $class = Message\Accounts\Requests\Essentials\GetAccountRequest::class;
+        }
+        if ($accessFlag == 'Essentials (New)') {
+
+        }
+        return $this->createRequest($class, $parameters);
     }
 
     /**
@@ -151,7 +173,18 @@ class Gateway extends AbstractGateway
      */
 
     public function getTaxRate(array $parameters = []){
-        return $this->createRequest('\PHPAccounting\MyobAccountRightLive\Message\TaxRates\Requests\GetTaxRateRequest', $parameters);
+        $accessFlag = $this->getAccessFlag();
+        $class = '';
+        if ($accessFlag == 'Online AccountRight') {
+            $class = Message\TaxRates\Requests\AccountRight\GetTaxRateRequest::class;
+        }
+        if ($accessFlag == 'Essentials') {
+            $class = Message\TaxRates\Requests\Essentials\GetTaxRateRequest::class;
+        }
+        if ($accessFlag == 'Essentials (New)') {
+
+        }
+        return $this->createRequest($class, $parameters);
     }
 
     /**
@@ -161,7 +194,18 @@ class Gateway extends AbstractGateway
      */
 
     public function getPayment(array $parameters = []){
-        return $this->createRequest('\PHPAccounting\MyobAccountRightLive\Message\Payments\Requests\GetPaymentRequest', $parameters);
+        $accessFlag = $this->getAccessFlag();
+        $class = '';
+        if ($accessFlag == 'Online AccountRight') {
+            $class = Message\Payments\Requests\AccountRight\GetPaymentRequest::class;
+        }
+        if ($accessFlag == 'Essentials') {
+
+        }
+        if ($accessFlag == 'Essentials (New)') {
+
+        }
+        return $this->createRequest($class, $parameters);
     }
 
     /**
@@ -171,7 +215,18 @@ class Gateway extends AbstractGateway
      */
 
     public function getOrganisation(array $parameters = []){
-        return $this->createRequest('\PHPAccounting\MyobAccountRightLive\Message\Organisations\Requests\GetOrganisationRequest', $parameters);
+        $accessFlag = $this->getAccessFlag();
+        $class = '';
+        if ($accessFlag == 'Online AccountRight') {
+            $class = Message\Organisations\Requests\AccountRight\GetOrganisationRequest::class;
+        }
+        if ($accessFlag == 'Essentials') {
+            $class = Message\Organisations\Requests\Essentials\GetOrganisationRequest::class;
+        }
+        if ($accessFlag == 'Essentials (New)') {
+
+        }
+        return $this->createRequest($class, $parameters);
     }
 
     /**
@@ -181,7 +236,18 @@ class Gateway extends AbstractGateway
      */
 
     public function getCurrentUser(array $parameters = []){
-        return $this->createRequest('\PHPAccounting\MyobAccountRightLive\Message\CurrentUser\Requests\GetCurrentUserRequest', $parameters);
+        $accessFlag = $this->getAccessFlag();
+        $class = '';
+        if ($accessFlag == 'Online AccountRight') {
+            $class = Message\CurrentUser\Requests\AccountRight\GetCurrentUserRequest::class;
+        }
+        if ($accessFlag == 'Essentials') {
+
+        }
+        if ($accessFlag == 'Essentials (New)') {
+
+        }
+        return $this->createRequest($class, $parameters);
     }
 
     /**
@@ -191,7 +257,18 @@ class Gateway extends AbstractGateway
      */
 
     public function getJournal(array $parameters = []){
-        return $this->createRequest('\PHPAccounting\MyobAccountRightLive\Message\Journals\Requests\GetJournalRequest', $parameters);
+        $accessFlag = $this->getAccessFlag();
+        $class = '';
+        if ($accessFlag == 'Online AccountRight') {
+            $class = Message\Journals\Requests\AccountRight\GetJournalRequest::class;
+        }
+        if ($accessFlag == 'Essentials') {
+            $class = Message\Journals\Requests\Essentials\GetJournalRequest::class;
+        }
+        if ($accessFlag == 'Essentials (New)') {
+
+        }
+        return $this->createRequest($class, $parameters);
     }
 
     /**
@@ -201,7 +278,18 @@ class Gateway extends AbstractGateway
      */
 
     public function getManualJournal(array $parameters = []){
-        return $this->createRequest('\PHPAccounting\MyobAccountRightLive\Message\ManualJournals\Requests\GetManualJournalRequest', $parameters);
+        $accessFlag = $this->getAccessFlag();
+        $class = '';
+        if ($accessFlag == 'Online AccountRight') {
+            $class = Message\ManualJournals\Requests\AccountRight\GetManualJournalRequest::class;
+        }
+        if ($accessFlag == 'Essentials') {
+
+        }
+        if ($accessFlag == 'Essentials (New)') {
+
+        }
+        return $this->createRequest($class, $parameters);
     }
 
     /**
@@ -211,6 +299,17 @@ class Gateway extends AbstractGateway
      */
 
     public function getInventoryItem(array $parameters = []){
-        return $this->createRequest('\PHPAccounting\MyobAccountRightLive\Message\InventoryItems\Requests\GetInventoryItemRequest', $parameters);
+        $accessFlag = $this->getAccessFlag();
+        $class = '';
+        if ($accessFlag == 'Online AccountRight') {
+            $class = Message\InventoryItems\Requests\AccountRight\GetInventoryItemRequest::class;
+        }
+        if ($accessFlag == 'Essentials') {
+            $class = Message\InventoryItems\Requests\Essentials\GetInventoryItemRequest::class;
+        }
+        if ($accessFlag == 'Essentials (New)') {
+
+        }
+        return $this->createRequest($class, $parameters);
     }
 }
