@@ -1,5 +1,5 @@
 <?php
-namespace PHPAccounting\MyobAccountRight\Message;
+namespace PHPAccounting\MyobAccountRightLive\Message;
 use Omnipay\Common\Message\ResponseInterface;
 
 abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest

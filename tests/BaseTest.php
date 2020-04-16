@@ -15,7 +15,7 @@ class BaseTest extends TestCase
         parent::setUp();
         $dotenv = Dotenv::create(__DIR__ . '/..');
         $dotenv->load();
-        $this->gateway = Omnipay::create('\PHPAccounting\MyobAccountRight\Gateway');
+        $this->gateway = Omnipay::create('\PHPAccounting\MyobAccountRightLive\Gateway');
 
         $this->gateway->setAPIKey(getenv('API_KEY'));
         $this->gateway->setAccessToken(getenv('ACCESS_TOKEN'));

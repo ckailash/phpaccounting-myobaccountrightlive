@@ -1,6 +1,6 @@
 {
-    "name": "pest-register/php-accounting-myobaccountright",
-    "description": "MYOB AccountRight package for PHP Accounting",
+    "name": "pest-register/phpaccounting-myobaccountrightlive",
+    "description": "MYOB AccountRightLive package for PHP Accounting",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -15,7 +15,7 @@
         "nesbot/carbon": "^2.18"
     },
     "autoload": {
-        "psr-4": { "PHPAccounting\\MyobAccountRight\\" : "src/" }
+        "psr-4": { "PHPAccounting\\MyobAccountRightLive\\" : "src/" }
     },
     "autoload-dev": {
         "psr-4": {

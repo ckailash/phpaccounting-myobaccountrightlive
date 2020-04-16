@@ -1,8 +1,9 @@
 <?php
 
-namespace PHPAccounting\MyobAccountRight;
+namespace PHPAccounting\MyobAccountRightLive;
 
 use Omnipay\Common\AbstractGateway;
+use PHPAccounting\MyobAccountRightLive\Message\Contacts\Requests\GetContactRequest;
 
 /**
  * Created by IntelliJ IDEA.
@@ -86,6 +87,13 @@ class Gateway extends AbstractGateway
         return $this->getParameter('companyEndpoint');
     }
 
+    public function setAccessFlag($value) {
+        return $this->setParameter('accessFlag', $value);
+    }
+    public function getAccessFlag() {
+        return $this->getParameter('accessFlag');
+    }
+
 
     /**
      * Customer Requests
@@ -102,9 +110,19 @@ class Gateway extends AbstractGateway
      * @return \Omnipay\Common\Message\AbstractRequest
      */
     public function getContact(array $parameters = []){
-        return $this->createRequest('\PHPAccounting\MyobAccountRight\Message\Contacts\Requests\GetContactRequest', $parameters);
+        $accessFlag = $this->getAccessFlag();
+        $class = '';
+        if ($accessFlag == 'Online AccountRight') {
+            $class = Message\Contacts\Requests\AccountRight\GetContactRequest::class;
+        }
+        if ($accessFlag == 'Essentials') {
+            $class = Message\Contacts\Requests\Essentials\GetContactRequest::class;
+        }
+        if ($accessFlag == 'Essentials (New)') {
+            $class = Message\Contacts\Requests\NewEssentials\GetContactRequest::class;
+        }
+        return $this->createRequest($class, $parameters);
     }
-
 
     /**
      * Invoice Requests
@@ -113,7 +131,7 @@ class Gateway extends AbstractGateway
      */
 
     public function getInvoice(array $parameters = []){
-        return $this->createRequest('\PHPAccounting\MyobAccountRight\Message\Invoices\Requests\GetInvoiceRequest', $parameters);
+        return $this->createRequest('\PHPAccounting\MyobAccountRightLive\Message\Invoices\Requests\GetInvoiceRequest', $parameters);
     }
 
     /**
@@ -123,7 +141,7 @@ class Gateway extends AbstractGateway
      */
 
     public function getAccount(array $parameters = []){
-        return $this->createRequest('\PHPAccounting\MyobAccountRight\Message\Accounts\Requests\GetAccountRequest', $parameters);
+        return $this->createRequest('\PHPAccounting\MyobAccountRightLive\Message\Accounts\Requests\GetAccountRequest', $parameters);
     }
 
     /**
@@ -133,7 +151,7 @@ class Gateway extends AbstractGateway
      */
 
     public function getTaxRate(array $parameters = []){
-        return $this->createRequest('\PHPAccounting\MyobAccountRight\Message\TaxRates\Requests\GetTaxRateRequest', $parameters);
+        return $this->createRequest('\PHPAccounting\MyobAccountRightLive\Message\TaxRates\Requests\GetTaxRateRequest', $parameters);
     }
 
     /**
@@ -143,7 +161,7 @@ class Gateway extends AbstractGateway
      */
 
     public function getPayment(array $parameters = []){
-        return $this->createRequest('\PHPAccounting\MyobAccountRight\Message\Payments\Requests\GetPaymentRequest', $parameters);
+        return $this->createRequest('\PHPAccounting\MyobAccountRightLive\Message\Payments\Requests\GetPaymentRequest', $parameters);
     }
 
     /**
@@ -153,7 +171,7 @@ class Gateway extends AbstractGateway
      */
 
     public function getOrganisation(array $parameters = []){
-        return $this->createRequest('\PHPAccounting\MyobAccountRight\Message\Organisations\Requests\GetOrganisationRequest', $parameters);
+        return $this->createRequest('\PHPAccounting\MyobAccountRightLive\Message\Organisations\Requests\GetOrganisationRequest', $parameters);
     }
 
     /**
@@ -163,7 +181,7 @@ class Gateway extends AbstractGateway
      */
 
     public function getCurrentUser(array $parameters = []){
-        return $this->createRequest('\PHPAccounting\MyobAccountRight\Message\CurrentUser\Requests\GetCurrentUserRequest', $parameters);
+        return $this->createRequest('\PHPAccounting\MyobAccountRightLive\Message\CurrentUser\Requests\GetCurrentUserRequest', $parameters);
     }
 
     /**
@@ -173,7 +191,7 @@ class Gateway extends AbstractGateway
      */
 
     public function getJournal(array $parameters = []){
-        return $this->createRequest('\PHPAccounting\MyobAccountRight\Message\Journals\Requests\GetJournalRequest', $parameters);
+        return $this->createRequest('\PHPAccounting\MyobAccountRightLive\Message\Journals\Requests\GetJournalRequest', $parameters);
     }
 
     /**
@@ -183,7 +201,7 @@ class Gateway extends AbstractGateway
      */
 
     public function getManualJournal(array $parameters = []){
-        return $this->createRequest('\PHPAccounting\MyobAccountRight\Message\ManualJournals\Requests\GetManualJournalRequest', $parameters);
+        return $this->createRequest('\PHPAccounting\MyobAccountRightLive\Message\ManualJournals\Requests\GetManualJournalRequest', $parameters);
     }
 
     /**
@@ -193,6 +211,6 @@ class Gateway extends AbstractGateway
      */
 
     public function getInventoryItem(array $parameters = []){
-        return $this->createRequest('\PHPAccounting\MyobAccountRight\Message\InventoryItems\Requests\GetInventoryItemRequest', $parameters);
+        return $this->createRequest('\PHPAccounting\MyobAccountRightLive\Message\InventoryItems\Requests\GetInventoryItemRequest', $parameters);
     }
 }
