@@ -1,5 +1,5 @@
 {
-    "name": "pest-register/phpaccounting-myobaccountrightlive",
+    "name": "pest-register/php-accounting-myobaccountrightlive",
     "description": "MYOB AccountRightLive package for PHP Accounting",
     "type": "library",
     "license": "MIT",
