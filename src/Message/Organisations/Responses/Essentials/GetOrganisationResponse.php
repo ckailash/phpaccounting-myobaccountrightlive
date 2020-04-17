@@ -58,6 +58,7 @@ class GetOrganisationResponse extends AbstractResponse
             $newOrganisation['uri'] = IndexSanityCheckHelper::indexSanityCheck('uri', $organisation);
             $newOrganisation['country_code'] = IndexSanityCheckHelper::indexSanityCheck('country', $organisation);
             $newOrganisation['gst_registered'] = IndexSanityCheckHelper::indexSanityCheck('gstRegistered', $organisation);
+            $newOrganisation['access_flag'] = IndexSanityCheckHelper::indexSanityCheck('UIAccessFlags', $organisation);
             array_push($organisations, $newOrganisation);
         }
 

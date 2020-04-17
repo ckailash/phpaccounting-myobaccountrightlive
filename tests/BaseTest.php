@@ -21,5 +21,6 @@ class BaseTest extends TestCase
         $this->gateway->setAccessToken(getenv('ACCESS_TOKEN'));
         $this->gateway->setCompanyEndpoint(getenv('COMPANY_FILE_URI'));
         $this->gateway->setCompanyFile(base64_encode('Administrator:'));
+        $this->gateway->setAccessFlag(getenv('ACCESS_FLAG'));
     }
 }

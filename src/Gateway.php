@@ -3,6 +3,7 @@
 namespace PHPAccounting\MyobAccountRightLive;
 
 use Omnipay\Common\AbstractGateway;
+use PHPAccounting\MyobAccountRightLive\Message\AccessFlag\Requests\GetAccessFlagRequest;
 use PHPAccounting\MyobAccountRightLive\Message\Contacts\Requests\GetContactRequest;
 
 /**
@@ -112,14 +113,14 @@ class Gateway extends AbstractGateway
     public function getContact(array $parameters = []){
         $accessFlag = $this->getAccessFlag();
         $class = '';
-        if ($accessFlag == 'Online AccountRight') {
+        if ($accessFlag == 1) {
             $class = Message\Contacts\Requests\AccountRight\GetContactRequest::class;
         }
         if ($accessFlag == 'Essentials') {
             $class = Message\Contacts\Requests\Essentials\GetContactRequest::class;
         }
-        if ($accessFlag == 'Essentials (New)') {
-
+        if ($accessFlag == 2 || $accessFlag == 3) {
+            // New Essentials and AccountRight
         }
         return $this->createRequest($class, $parameters);
     }
@@ -133,14 +134,14 @@ class Gateway extends AbstractGateway
     public function getInvoice(array $parameters = []){
         $accessFlag = $this->getAccessFlag();
         $class = '';
-        if ($accessFlag == 'Online AccountRight') {
+        if ($accessFlag == 1) {
             $class = Message\Invoices\Requests\AccountRight\GetInvoiceRequest::class;
         }
         if ($accessFlag == 'Essentials') {
             $class = Message\Invoices\Requests\Essentials\GetInvoiceRequest::class;
         }
-        if ($accessFlag == 'Essentials (New)') {
-
+        if ($accessFlag == 2 || $accessFlag == 3) {
+            // New Essentials and AccountRight
         }
         return $this->createRequest($class, $parameters);
     }
@@ -154,14 +155,14 @@ class Gateway extends AbstractGateway
     public function getAccount(array $parameters = []){
         $accessFlag = $this->getAccessFlag();
         $class = '';
-        if ($accessFlag == 'Online AccountRight') {
+        if ($accessFlag == 1) {
             $class = Message\Accounts\Requests\AccountRight\GetAccountRequest::class;
         }
         if ($accessFlag == 'Essentials') {
             $class = Message\Accounts\Requests\Essentials\GetAccountRequest::class;
         }
-        if ($accessFlag == 'Essentials (New)') {
-
+        if ($accessFlag == 2 || $accessFlag == 3) {
+            // New Essentials and AccountRight
         }
         return $this->createRequest($class, $parameters);
     }
@@ -175,14 +176,14 @@ class Gateway extends AbstractGateway
     public function getTaxRate(array $parameters = []){
         $accessFlag = $this->getAccessFlag();
         $class = '';
-        if ($accessFlag == 'Online AccountRight') {
+        if ($accessFlag == 1) {
             $class = Message\TaxRates\Requests\AccountRight\GetTaxRateRequest::class;
         }
         if ($accessFlag == 'Essentials') {
             $class = Message\TaxRates\Requests\Essentials\GetTaxRateRequest::class;
         }
-        if ($accessFlag == 'Essentials (New)') {
-
+        if ($accessFlag == 2 || $accessFlag == 3) {
+            // New Essentials and AccountRight
         }
         return $this->createRequest($class, $parameters);
     }
@@ -196,14 +197,14 @@ class Gateway extends AbstractGateway
     public function getPayment(array $parameters = []){
         $accessFlag = $this->getAccessFlag();
         $class = '';
-        if ($accessFlag == 'Online AccountRight') {
+        if ($accessFlag == 1) {
             $class = Message\Payments\Requests\AccountRight\GetPaymentRequest::class;
         }
         if ($accessFlag == 'Essentials') {
 
         }
-        if ($accessFlag == 'Essentials (New)') {
-
+        if ($accessFlag == 2 || $accessFlag == 3) {
+            // New Essentials and AccountRight
         }
         return $this->createRequest($class, $parameters);
     }
@@ -217,14 +218,14 @@ class Gateway extends AbstractGateway
     public function getOrganisation(array $parameters = []){
         $accessFlag = $this->getAccessFlag();
         $class = '';
-        if ($accessFlag == 'Online AccountRight') {
+        if ($accessFlag == 1) {
             $class = Message\Organisations\Requests\AccountRight\GetOrganisationRequest::class;
         }
         if ($accessFlag == 'Essentials') {
             $class = Message\Organisations\Requests\Essentials\GetOrganisationRequest::class;
         }
-        if ($accessFlag == 'Essentials (New)') {
-
+        if ($accessFlag == 2 || $accessFlag == 3) {
+            // New Essentials and AccountRight
         }
         return $this->createRequest($class, $parameters);
     }
@@ -238,14 +239,14 @@ class Gateway extends AbstractGateway
     public function getCurrentUser(array $parameters = []){
         $accessFlag = $this->getAccessFlag();
         $class = '';
-        if ($accessFlag == 'Online AccountRight') {
+        if ($accessFlag == 1) {
             $class = Message\CurrentUser\Requests\AccountRight\GetCurrentUserRequest::class;
         }
         if ($accessFlag == 'Essentials') {
 
         }
-        if ($accessFlag == 'Essentials (New)') {
-
+        if ($accessFlag == 2 || $accessFlag == 3) {
+            // New Essentials and AccountRight
         }
         return $this->createRequest($class, $parameters);
     }
@@ -259,14 +260,14 @@ class Gateway extends AbstractGateway
     public function getJournal(array $parameters = []){
         $accessFlag = $this->getAccessFlag();
         $class = '';
-        if ($accessFlag == 'Online AccountRight') {
+        if ($accessFlag == 1) {
             $class = Message\Journals\Requests\AccountRight\GetJournalRequest::class;
         }
         if ($accessFlag == 'Essentials') {
             $class = Message\Journals\Requests\Essentials\GetJournalRequest::class;
         }
-        if ($accessFlag == 'Essentials (New)') {
-
+        if ($accessFlag == 2 || $accessFlag == 3) {
+            // New Essentials and AccountRight
         }
         return $this->createRequest($class, $parameters);
     }
@@ -280,14 +281,14 @@ class Gateway extends AbstractGateway
     public function getManualJournal(array $parameters = []){
         $accessFlag = $this->getAccessFlag();
         $class = '';
-        if ($accessFlag == 'Online AccountRight') {
+        if ($accessFlag == 1) {
             $class = Message\ManualJournals\Requests\AccountRight\GetManualJournalRequest::class;
         }
         if ($accessFlag == 'Essentials') {
 
         }
-        if ($accessFlag == 'Essentials (New)') {
-
+        if ($accessFlag == 2 || $accessFlag == 3) {
+            // New Essentials and AccountRight
         }
         return $this->createRequest($class, $parameters);
     }
@@ -301,14 +302,14 @@ class Gateway extends AbstractGateway
     public function getInventoryItem(array $parameters = []){
         $accessFlag = $this->getAccessFlag();
         $class = '';
-        if ($accessFlag == 'Online AccountRight') {
+        if ($accessFlag == 1) {
             $class = Message\InventoryItems\Requests\AccountRight\GetInventoryItemRequest::class;
         }
         if ($accessFlag == 'Essentials') {
             $class = Message\InventoryItems\Requests\Essentials\GetInventoryItemRequest::class;
         }
-        if ($accessFlag == 'Essentials (New)') {
-
+        if ($accessFlag == 2 || $accessFlag == 3) {
+            // New Essentials and AccountRight
         }
         return $this->createRequest($class, $parameters);
     }
