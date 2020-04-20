@@ -216,17 +216,16 @@ class Gateway extends AbstractGateway
      */
 
     public function getOrganisation(array $parameters = []){
-        $accessFlag = $this->getAccessFlag();
-        $class = '';
-        if ($accessFlag == 1) {
-            $class = Message\Organisations\Requests\AccountRight\GetOrganisationRequest::class;
-        }
-        if ($accessFlag == 'Essentials') {
-            $class = Message\Organisations\Requests\Essentials\GetOrganisationRequest::class;
-        }
-        if ($accessFlag == 2 || $accessFlag == 3) {
-            // New Essentials and AccountRight
-        }
+        $class = Message\Organisations\Requests\AccountRight\GetOrganisationRequest::class;
+//        if ($accessFlag == 1) {
+//
+//        }
+//        if ($accessFlag == 'Essentials') {
+//            $class = Message\Organisations\Requests\Essentials\GetOrganisationRequest::class;
+//        }
+//        if ($accessFlag == 2 || $accessFlag == 3) {
+//            // New Essentials and AccountRight
+//        }
         return $this->createRequest($class, $parameters);
     }
 
