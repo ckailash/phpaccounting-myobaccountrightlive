@@ -236,17 +236,8 @@ class Gateway extends AbstractGateway
      */
 
     public function getCurrentUser(array $parameters = []){
-        $accessFlag = $this->getAccessFlag();
-        $class = '';
-        if ($accessFlag == 1) {
-            $class = Message\CurrentUser\Requests\AccountRight\GetCurrentUserRequest::class;
-        }
-        if ($accessFlag == 'Essentials') {
+        $class = Message\CurrentUser\Requests\AccountRight\GetCurrentUserRequest::class;
 
-        }
-        if ($accessFlag == 2 || $accessFlag == 3) {
-            // New Essentials and AccountRight
-        }
         return $this->createRequest($class, $parameters);
     }
 
